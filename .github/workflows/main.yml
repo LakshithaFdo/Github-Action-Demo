@@ -37,6 +37,7 @@ jobs:
           image: lakshitha200/springboot-github-action
           tags: today
           registry: docker.io
+          context: .
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
