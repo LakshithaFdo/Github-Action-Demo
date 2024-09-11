@@ -34,7 +34,7 @@ jobs:
       - name: Build & Push Docker image to Docker Hub
         uses: docker/build-push-action@v5
         with:
-          image: lakshitha200/springboot-github-action
+          image: lakshitha200/springboot-github-action-secondway
           tags: today
           registry: docker.io
           context: .
