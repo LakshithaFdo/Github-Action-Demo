@@ -34,10 +34,10 @@ jobs:
       - name: Build & Push Docker image to Docker Hub
         uses: docker/build-push-action@v5
         with:
+          image: lakshitha200/springboot-github-action-secondway
+          tags: v1
+          registry: docker.io
           context: .
           dockerfile: Dockerfile
-          push: true
-          tags: |
-            docker.io/lakshitha200/springboot-github-action-secondway:latest
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
