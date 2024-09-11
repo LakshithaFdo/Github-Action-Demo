@@ -40,4 +40,4 @@ jobs:
           tags: |
             docker.io/lakshitha200/springboot-github-action-secondway:latest
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN_02 }}
