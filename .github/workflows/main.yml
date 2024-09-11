@@ -31,13 +31,16 @@ jobs:
           mvn clean
           mvn -B package --file pom.xml
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
       - name: Build & Push Docker image to Docker Hub
         uses: docker/build-push-action@v2
         with:
           context: .
           dockerfile: Dockerfile
           push: true
-          tags: |
-            docker.io/lakshitha200/springboot-github-action-secondway:latest
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN_02 }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/springboot-github-action:today
