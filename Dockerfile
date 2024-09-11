@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/*.jar /app/springbootgithubaction.jar
 
 # Expose the port your application will run on
-EXPOSE 8080
+EXPOSE 8081
 
 # Run the jar file
 CMD ["java", "-jar", "springbootgithubaction.jar"]
