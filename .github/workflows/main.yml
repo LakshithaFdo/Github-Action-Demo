@@ -1,46 +1,47 @@
 name: GitHub Action with Spring Boot 2
 
-on:
-  push:
+on:           # Defines the event that triggers this workflow.
+  push:       # This workflow runs whenever there's a push event.
     branches:
-      - main
+      - main  # Limits the workflow to trigger only to the main branch.
   pull_request:
     branches:
       - main
 
-jobs:
+jobs:             # Defines the individual jobs within the workflow.
   build-deploy:
     name: Build and Deploy Spring Boot APP
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest   # Specifies the type of virtual machine to run the job on
 
-    steps:
-      - name: Check out the code
-        uses: actions/checkout@v3
+    steps:        # The list of actions to perform in this job.
+      - name: Check out the code    # Name of the action
+        uses: actions/checkout@v3   # Uses the actions/checkout@v2 action to pull the latest code from the repository (github market place) into the GitHub Actions runner environment.
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3  # Uses the actions/setup-java@v2 action to install Java JDK version 17
         with:
           java-version: '17'
           distribution: 'corretto'
 
       - name: Run Unit tests
-        run:  mvn -B test --file pom.xml
+        run:  mvn -B test --file pom.xml # The --file option in the Maven command specifies the path to the pom.xml file that Maven should use for the build
 
+        # combined mvn clean and mvn package instead of two separate actions =========
       - name: Build & Package application
-        run: | 
+        run: |
           mvn clean
           mvn -B package --file pom.xml
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Build & Push Docker image to Docker Hub
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          dockerfile: Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/springboot-github-action:today
+#      - name: Log in to Docker Hub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+#
+#      - name: Build & Push Docker image to Docker Hub
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          dockerfile: Dockerfile
+#          push: true
+#          tags: ${{ secrets.DOCKER_USERNAME }}/springboot-github-action:today
